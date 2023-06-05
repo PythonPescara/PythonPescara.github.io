@@ -1,2 +1,3 @@
-# PythonPescara.github.io
-Python Pescara static website.
+# Python Pescara 🐬
+
+Python Pescara 🐬 static website.
