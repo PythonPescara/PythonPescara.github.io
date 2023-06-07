@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mappa - Python Italia</title>
+  <meta name="description" content="Mappa delle comunità locali di Python Italia." />
+  <link rel="canonical" href="https://pescara.python.it/map" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script id="markers-data" type="application/json">
+    {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Pescara"
+            },
+            "geometry": {
+              "coordinates": [14.205819964602938, 42.46984096286192],
+              "type": "Point"
+            },
+            "id": 0
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Milano"
+            },
+            "geometry": {
+              "coordinates": [9.188836510861023, 45.46362329978598],
+              "type": "Point"
+            },
+            "id": 1
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Trento"
+            },
+            "geometry": {
+              "coordinates": [11.125800893766893, 46.06625012402125],
+              "type": "Point"
+            },
+            "id": 2
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Catania"
+            },
+            "geometry": {
+              "coordinates": [15.087221997345694, 37.50239665037772],
+              "type": "Point"
+            },
+            "id": 3
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Roma"
+            },
+            "geometry": {
+              "coordinates": [12.482479208463815, 41.892503455300016],
+              "type": "Point"
+            },
+            "id": 4
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Bari"
+            },
+            "geometry": {
+              "coordinates": [16.86205779003987, 41.12577641608655],
+              "type": "Point"
+            },
+            "id": 5
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Biella"
+            },
+            "geometry": {
+              "coordinates": [8.054143437755044, 45.56637092970453],
+              "type": "Point"
+            },
+            "id": 6
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Campania"
+            },
+            "geometry": {
+              "coordinates": [14.248648432582883, 40.835670232648994],
+              "type": "Point"
+            },
+            "id": 7
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Firenze"
+            },
+            "geometry": {
+              "coordinates": [11.25546174238653, 43.76964120840046],
+              "type": "Point"
+            },
+            "id": 8
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Reggio Emilia"
+            },
+            "geometry": {
+              "coordinates": [10.62958395232883, 44.69646464681864],
+              "type": "Point"
+            },
+            "id": 9
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Torino",
+              "url": "https://torino.python.it"
+            },
+            "geometry": {
+              "coordinates": [7.6823552003580176, 45.06765259825056],
+              "type": "Point"
+            },
+            "id": 10
+          }
+        ]
+      }
+    </script>
+  <div id="map"></div>
+  <script>
+    const map = L.map('map')
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    const markers = JSON.parse(document.getElementById("markers-data").textContent);
+    let feature = L.geoJSON(markers)
+      .bindPopup(function (layer) {
+        return "<a href='" + layer.feature.properties.url + "'>" + layer.feature.properties.name + "</a>";
+      })
+      .addTo(map);
+    map.fitBounds(feature.getBounds(), { padding: [100, 100] });
+  </script>
+</body>
+
+</html>
