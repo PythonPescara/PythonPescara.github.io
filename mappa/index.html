@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
+  <title>Mappa - Python Italia</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mappa - Python Italia</title>
   <meta name="description" content="Mappa delle comunità locali di Python Italia." />
   <link rel="canonical" href="https://pescara.python.it/map" />
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>">
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <style>
     html,
     body {
@@ -27,7 +22,6 @@
     }
   </style>
 </head>
-
 <body>
   <script id="markers-data" type="application/json">
     {
@@ -176,6 +170,18 @@
               "type": "Point"
             },
             "id": 11
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "Varese",
+              "url": "https://varese.python.it/"
+            },
+            "geometry": {
+              "coordinates": [8.83301, 45.81636],
+              "type": "Point"
+            },
+            "id": 12
           }
         ]
       }
@@ -185,16 +191,15 @@
     const map = L.map('map')
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: "&copy; <a href='http://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a> contributors"
     }).addTo(map);
     const markers = JSON.parse(document.getElementById("markers-data").textContent);
     let feature = L.geoJSON(markers)
       .bindPopup(function (layer) {
-        return "<a href='" + layer.feature.properties.url + "'>" + layer.feature.properties.name + "</a>";
+        return "<a href='" + layer.feature.properties.url + "' target='_blank'>" + layer.feature.properties.name + "</a>";
       })
       .addTo(map);
     map.fitBounds(feature.getBounds(), { padding: [100, 100] });
   </script>
 </body>
-
 </html>
