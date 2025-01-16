@@ -15,10 +15,12 @@
       height: 100%;
       margin: 0;
     }
-
     #map {
       height: 100%;
       width: 100%;
+    }
+    figcaption {
+      text-align: center;
     }
   </style>
 </head>
@@ -30,7 +32,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Pescara",
+              "logo_url": "../images/pythonpescara.svg",
+              "name": "Python Pescara",
               "url": "https://pescara.python.it"
             },
             "geometry": {
@@ -42,7 +45,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Milano",
+              "logo_url": "https://milano.python.it/assets/img/pymi.png",
+              "name": "PyMI",
               "url": "https://milano.python.it"
             },
             "geometry": {
@@ -54,7 +58,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Trento",
+              "logo_url": "../images//pytrento.jpg",
+              "name": "PyTrento",
               "url": "https://trento.python.it"
             },
             "geometry": {
@@ -66,7 +71,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Catania",
+              "logo_url": "../images/pythoncatania.svg",
+              "name": "Python Catania",
               "url": "https://t.me/pythoncatania"
             },
             "geometry": {
@@ -78,7 +84,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Roma",
+              "logo_url": "https://roma.python.it/img/logo.svg",
+              "name": "PyRoma",
               "url": "https://roma.python.it"
             },
             "geometry": {
@@ -90,7 +97,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Bari",
+              "logo_url": "../images/pybari.svg",
+              "name": "PyBari",
               "url": "https://bari.python.it"
             },
             "geometry": {
@@ -102,8 +110,9 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Biella",
-              "url": "https://linktr.ee/pythonbiellagroup"
+              "logo_url": "https://ugc.production.linktr.ee/wlblsv8hT1q7vmLSqtQv_lQOsG5QtYGL251xJ?io=true&size=avatar-v3_0",
+              "name": "Python Biella",
+              "url": "https://pythonbiellagroup.it/"
             },
             "geometry": {
               "coordinates": [8.054143437755044, 45.56637092970453],
@@ -114,7 +123,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Campania",
+              "logo_url": "https://www.pycampania.it/theme/images/logo.png",
+              "name": "PyCampania",
               "url": "https://pycampania.it/"
             },
             "geometry": {
@@ -126,8 +136,9 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Firenze",
-              "url": "https://www.meetup.com/python-firenze"
+              "logo_url": "../images/pythonfirenze.jpg",
+              "name": "Python Firenze",
+              "url": "https://firenze.python.it/"
             },
             "geometry": {
               "coordinates": [11.25546174238653, 43.76964120840046],
@@ -138,7 +149,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Reggio Emilia",
+              "logo_url": "https://www.pyre.it/static/landing/images/logo.png",
+              "name": "PyRe",
               "url": "https://www.pyre.it"
             },
             "geometry": {
@@ -150,8 +162,9 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Torino",
-              "url": "https://www.meetup.com/Python-Torino/"
+              "logo_url": "../images/pythontorino.svg",
+              "name": "Python Torino",
+              "url": "https://torino.python.it/"
             },
             "geometry": {
               "coordinates": [7.6823552003580176, 45.06765259825056],
@@ -162,7 +175,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Perugia",
+              "logo_url": "../images/pypg.png",
+              "name": "PyPg",
               "url": "http://www.pypg.org/"
             },
             "geometry": {
@@ -174,7 +188,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Varese",
+              "logo_url": "../images/pythonvarese.jpg",
+              "name": "PyVarese",
               "url": "https://varese.python.it/"
             },
             "geometry": {
@@ -186,7 +201,8 @@
           {
             "type": "Feature",
             "properties": {
-              "name": "Marche",
+              "logo_url": "../images/pymarche.svg",
+              "name": "PyMarche",
               "url": "https://marche.python.it/"
             },
             "geometry": {
@@ -208,7 +224,7 @@
     const markers = JSON.parse(document.getElementById("markers-data").textContent);
     let feature = L.geoJSON(markers)
       .bindPopup(function (layer) {
-        return "<a href='" + layer.feature.properties.url + "' target='_blank'>" + layer.feature.properties.name + "</a>";
+        return "<a href='" + layer.feature.properties.url + "' target='_blank'><figure><img src='" + layer.feature.properties.logo_url + "' width='128px' alt='" + layer.feature.properties.name + " logo'><figcaption>" + layer.feature.properties.name + "</figcaption></figure></a>";
       })
       .addTo(map);
     map.fitBounds(feature.getBounds(), { padding: [100, 100] });
