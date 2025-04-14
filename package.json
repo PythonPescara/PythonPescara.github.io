@@ -3,6 +3,6 @@
     "@picocss/pico": "^2.1.1"
   },
   "devDependencies": {
-    "sass": "^1.85.1"
+    "sass": "^1.86.3"
   }
 }
