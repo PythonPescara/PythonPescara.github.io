@@ -1,9 +1,15 @@
 // Pico lightweight version
 @use "node_modules/@picocss/pico/scss/pico" with (
 
+  // Theme color
+  $theme-color: "azure", // amber, azure, blue, cyan, fuchsia, green, grey, indigo, jade, lime, orange, pink, pumpkin, purple, red, sand, slate, violet, yellow, zinc
+
+  // Enable <header>, <main>, <footer> inside $semantic-root-element as containers
+  $enable-semantic-container: true,
+
   // Enable .classes
   // .classless version if disabled
-  $enable-classes: true,
+  $enable-classes: false,
 
   $modules: (
     // Theme
@@ -12,10 +18,10 @@
     // Layout
     "layout/document": true,
     "layout/landmarks": true,
-    "layout/container": false,
-    "layout/section": false,
-    "layout/grid": true,
-    "layout/overflow-auto": false,
+    "layout/container": true,
+    "layout/section": true,
+    "layout/grid": false,
+    "layout/overflow-auto": true,
 
     // Content
     "content/link": true,
